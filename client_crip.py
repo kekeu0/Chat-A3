@@ -1,6 +1,15 @@
 import socket
 import threading
 from cryptography.fernet import Fernet
+import gera_key_crip
+from pathlib import Path
+
+# Gerar chave e 
+caminho = Path('key.key')
+if caminho.exists():
+    print("O arquivo já existe.")
+else:
+    gera_key_crip.gerar_chave()
 
 # Carregar chave 
 with open("key.key", "rb") as f:
