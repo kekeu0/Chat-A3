@@ -53,7 +53,7 @@ def recebe():
 
 def escrever():
     while True:
-        msg = input()
+        msg = input("\n")
 
         if msg.upper() == "TT":
             # TT
