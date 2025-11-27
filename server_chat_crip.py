@@ -1,6 +1,9 @@
 import threading
 import socket
 
+import time
+import pyfiglet
+
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(('127.0.0.1', 5454))
 server.listen()
@@ -8,7 +11,17 @@ server.listen()
 clients = []
 nomes = []
 
-print("Servidor Iniciado\nEsperando conexão com clientes...")
+def texto_efeito(text, delay=0.1):
+    for char in text:
+        print(char, end="", flush=True)
+        time.sleep(delay)
+    print()
+
+ascii_banner = pyfiglet.figlet_format("CHAT SERVER", font="slant")
+print(ascii_banner)
+print("----------- A3 - pr. Alberlan - Unifacs -----------\n")
+texto_efeito("S E R V I D O R   I N I C I A D O\n", delay=0.05)
+texto_efeito("Esperando conexão com clientes . . .\n", delay=0.08)
 
 
 def transmissao(msg, remetente=None):

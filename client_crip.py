@@ -4,10 +4,13 @@ from cryptography.fernet import Fernet
 import gera_key_crip
 from pathlib import Path
 
+import time
+import pyfiglet
+
 # Gerar chave e 
 caminho = Path('key.key')
 if caminho.exists():
-    print("O arquivo já existe.")
+    print("")
 else:
     gera_key_crip.gerar_chave()
 
@@ -17,8 +20,19 @@ with open("key.key", "rb") as f:
 
 fernet = Fernet(key)
 
-nome = input("Qual seu nome: ")
-print('\nDigite "TT" para sair e fechar o chat')
+def texto_efeito(text, delay=0.1):
+    for char in text:
+        print(char, end="", flush=True)
+        time.sleep(delay)
+    print()
+
+ascii_banner = pyfiglet.figlet_format("CHAT CLIENT", font="slant")
+print(ascii_banner)
+print("----------- A3 - pr. Alberlan - Unifacs -----------\n")
+
+texto_efeito("Qual seu nome: ", delay=0.08)
+nome = input()
+texto_efeito('\nDigite "TT" para sair e fechar o chat', delay=0.07)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('127.0.0.1', 5454))
@@ -32,7 +46,6 @@ def recebe():
             if not dados:
                 break
 
-            
             if dados == b'NOME':
                 client.send(nome.encode())
                 continue
@@ -40,13 +53,12 @@ def recebe():
             # descriptografar
             try:
                 texto = fernet.decrypt(dados).decode()
-                print(texto)
+                texto_efeito(texto, delay=0.06)
             except:
-               
                 print(dados.decode())
 
         except:
-            print("Fechando chat...")
+            texto_efeito("Fechando chat...", delay=0.08)
             client.close()
             break
 
