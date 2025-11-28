@@ -45,7 +45,6 @@ def tratar(client):
             if not msg:
                 remover_client()
                 return
-
            
             transmissao(msg, remetente=client)
 
@@ -65,8 +64,8 @@ def recebe():
         clients.append(client)
 
         print(f'O nome do client é {nome}')
-        transmissao(f'{nome} Entrou no chat'.encode())
-        client.send('Conectado ao servidor!'.encode())
+        transmissao(f'{nome} Entrou no chat\n'.encode())
+        client.send('Conectado ao servidor!\n'.encode())
 
         thread = threading.Thread(target=tratar, args=(client,))
         thread.start()

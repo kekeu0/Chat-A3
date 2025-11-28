@@ -10,7 +10,7 @@ import pyfiglet
 # Gerar chave e 
 caminho = Path('key.key')
 if caminho.exists():
-    print("")
+    print("O arquivo já existe")
 else:
     gera_key_crip.gerar_chave()
 
@@ -32,7 +32,7 @@ print("----------- A3 - pr. Alberlan - Unifacs -----------\n")
 
 texto_efeito("Qual seu nome: ", delay=0.08)
 nome = input()
-texto_efeito('\nDigite "TT" para sair e fechar o chat', delay=0.07)
+texto_efeito('\nDigite "TT" para sair e fechar o chat', delay=0.04)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(('127.0.0.1', 5454))
